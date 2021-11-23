@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../api/item_api.dart';
+import '/api/item_api.dart';
 import '/model/product_model.dart';
 
 class Items with ChangeNotifier {
