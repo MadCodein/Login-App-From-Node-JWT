@@ -24,13 +24,13 @@ class ItemModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['cost'] = this.cost;
-    data['quantity'] = this.quantity;
-    data['locationId'] = this.locationId;
-    data['familyId'] = this.familyId;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['cost'] = cost;
+    data['quantity'] = quantity;
+    data['locationId'] = locationId;
+    data['familyId'] = familyId;
     return data;
   }
 }

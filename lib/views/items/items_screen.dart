@@ -30,9 +30,10 @@ class Item extends StatelessWidget {
               child: Text(snapshot.error.toString()),
             );
           }
+
           return RefreshIndicator(
             onRefresh: () => refreshProducts(context, provider.path),
-            child: const ProductList(),
+            child: const ItemList(),
           );
         },
       ),

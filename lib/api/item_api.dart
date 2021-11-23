@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -6,6 +7,8 @@ import 'package:http/http.dart' as http;
 import '/model/error_message.dart';
 
 class ItemApi {
+  static const int timeoutDuration = 20;
+
   static Future fetchAnythingApi(String authToken, String path) async {
     try {
       var url = Uri.parse("http://10.0.2.2:8000/$path");
@@ -13,7 +16,7 @@ class ItemApi {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Authorization': 'Bearer $authToken',
-      });
+      }).timeout(const Duration(seconds: timeoutDuration));
 
       // print(json.decode(response.body)[0]['name']);
 
@@ -25,6 +28,8 @@ class ItemApi {
       }
     } on HttpException {
       throw ErrorMessage("No Internet");
+    } on TimeoutException {
+      throw ErrorMessage("Problem communicating to server");
     } on SocketException {
       throw ErrorMessage("No Internet");
     } on FormatException {

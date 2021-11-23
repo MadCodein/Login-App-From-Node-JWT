@@ -10,10 +10,8 @@ class Items with ChangeNotifier {
   List<ItemModel> _items = [];
   String _path = "products";
 
-  // this [..._products] is a reference to the original list or copy of the orginal list
-  List<ItemModel> get items {
-    return [..._items];
-  }
+  // this [..._items] is a reference to the original list or copy of the orginal list
+  List<ItemModel> get items => [..._items];
 
   String get path => _path;
 

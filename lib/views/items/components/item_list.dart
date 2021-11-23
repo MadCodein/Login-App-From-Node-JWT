@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 
 import '/viewModel/items_provider.dart';
 
-class ProductList extends StatelessWidget {
-  const ProductList({Key? key}) : super(key: key);
+class ItemList extends StatelessWidget {
+  const ItemList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
