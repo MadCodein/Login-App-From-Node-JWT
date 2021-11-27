@@ -65,7 +65,7 @@ class AuthApi {
                 },
               ))
           .timeout(const Duration(seconds: timeoutDuration));
-      // print(response.body);
+
       //* Success
       if (response.statusCode == 200) {
         return json.decode(response.body);
@@ -75,8 +75,10 @@ class AuthApi {
       if (response.statusCode == 401) {
         return throw ErrorMessage(json.decode(response.body)['message']);
       }
+
+      return throw "Error connecting to server";
     } on HttpException {
-      throw ErrorMessage("Problem communicating to server");
+      throw ErrorMessage("Problem communicating to server: HttpException");
     } on TimeoutException {
       throw ErrorMessage("Problem communicating to server");
     } on SocketException {
@@ -86,7 +88,7 @@ class AuthApi {
     } on PlatformException {
       throw ErrorMessage("An error occurred, please check your credentials!");
     } catch (e) {
-      rethrow;
+      throw ErrorMessage("Problem Communicating to Server");
     }
   }
 }
