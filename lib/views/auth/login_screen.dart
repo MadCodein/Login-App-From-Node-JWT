@@ -76,15 +76,9 @@ class _LoginState extends State<Login> {
                     ),
                   );
 
-                  setState(() {
-                    _isLoading = false;
-                  });
                   // Navigator.pushNamedAndRemoveUntil(
                   //     context, homeRoute, (route) => false);
                 } catch (error) {
-                  setState(() {
-                    _isLoading = false;
-                  });
                   ScaffoldMessenger.of(context).hideCurrentSnackBar();
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
@@ -92,6 +86,9 @@ class _LoginState extends State<Login> {
                     ),
                   );
                 }
+                setState(() {
+                  _isLoading = false;
+                });
               },
               style: ElevatedButton.styleFrom(
                 primary: Colors.black,
