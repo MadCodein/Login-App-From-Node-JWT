@@ -55,8 +55,9 @@ AppBar customAppBar(BuildContext context) {
                     TextButton(
                       onPressed: () {
                         Provider.of<Auth>(context, listen: false).logout();
-                        Navigator.pushNamedAndRemoveUntil(
-                            context, "/login", (route) => false);
+
+                        // Navigator.pushNamedAndRemoveUntil(
+                        //     context, "/login", (route) => false);
                       },
                       child: const Text('Yes'),
                     ),
