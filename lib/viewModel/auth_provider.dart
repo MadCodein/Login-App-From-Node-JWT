@@ -12,8 +12,10 @@ class Auth with ChangeNotifier {
   DateTime? _expiryDate;
   String? _userId;
   Timer? _authTimer;
+  bool _isLogoutPressed = false;
 
   String? get userId => _userId;
+  bool? get isLogoutPressed => _isLogoutPressed;
 
   bool? get isAuthenticated {
     return _token != null;
@@ -32,6 +34,7 @@ class Auth with ChangeNotifier {
   //* be shown for sometime
   Future<bool> autoLogin() async {
     await Future.delayed(const Duration(seconds: 1), () async {
+      _isLogoutPressed = false;
       final prefs = await SharedPreferences.getInstance();
 
       if (!prefs.containsKey('userData')) {
@@ -113,6 +116,7 @@ class Auth with ChangeNotifier {
     _token = null;
     _userId = null;
     _expiryDate = null;
+    _isLogoutPressed = true;
 
     final prefs = await SharedPreferences.getInstance();
     prefs.remove('userData');
