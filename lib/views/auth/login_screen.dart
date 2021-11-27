@@ -37,7 +37,6 @@ class _LoginState extends State<Login> {
             TextFormField(
               autocorrect: false,
               textCapitalization: TextCapitalization.none,
-              enableSuggestions: false,
               decoration: const InputDecoration(
                 filled: true,
                 fillColor: Colors.black12,
@@ -49,6 +48,7 @@ class _LoginState extends State<Login> {
             ),
             const SizedBox(height: 20),
             TextFormField(
+              obscureText: true,
               decoration: const InputDecoration(
                 filled: true,
                 fillColor: Colors.black12,
@@ -62,12 +62,13 @@ class _LoginState extends State<Login> {
             ElevatedButton(
               onPressed: () async {
                 try {
-                  final provider = Provider.of<Auth>(context, listen: false);
-                  await provider.signIn(_email, _password);
-
                   setState(() {
                     _isLoading = true;
                   });
+
+                  final provider = Provider.of<Auth>(context, listen: false);
+                  await provider.signIn(_email, _password);
+
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(
@@ -81,6 +82,9 @@ class _LoginState extends State<Login> {
                   // Navigator.pushNamedAndRemoveUntil(
                   //     context, homeRoute, (route) => false);
                 } catch (error) {
+                  setState(() {
+                    _isLoading = false;
+                  });
                   ScaffoldMessenger.of(context).hideCurrentSnackBar();
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
