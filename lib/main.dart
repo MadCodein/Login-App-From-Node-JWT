@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
       ],
       child: Consumer<Auth>(
         builder: (context, auth, _) {
+          print(auth.isAuthenticated);
           return MaterialApp(
             key: Key('auth_${auth.isAuthenticated}'),
             // initialRoute: auth.isAuthenticated! ? homeRoute : splashRoute,
@@ -31,9 +32,15 @@ class MyApp extends StatelessWidget {
                 : FutureBuilder(
                     future: auth.autoLogin(),
                     builder: (ctx, snapshot) {
+                      //*this checks to see if the user has pressed the logout button so that when he clicks that it will navigate straight
+                      //*to the Login screen and not build the splashscreen
+                      if (auth.isLogoutPressed!) {
+                        return const Login();
+                      }
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const SplashScreen();
                       }
+
                       return const Login();
                     }),
             routes: {
