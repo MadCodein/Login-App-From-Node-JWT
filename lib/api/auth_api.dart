@@ -47,7 +47,7 @@ class AuthApi {
     } on FormatException {
       throw ErrorMessage("Invalid Format");
     } catch (e) {
-      rethrow;
+      throw ErrorMessage("Problem Communicating to Server");
     }
   }
 
